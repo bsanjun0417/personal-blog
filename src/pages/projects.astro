@@ -1,0 +1,17 @@
+---
+import Layout from "@layouts/Layout.astro";
+import ProjectCard from "@components/ProjectCard.astro";
+import { projects } from "@data/projects";
+---
+
+<Layout title="Projects" description="개인 프로젝트 목록">
+  <section class="page-hero section">
+    <p class="section-label">Projects</p>
+    <h1>프로젝트</h1>
+    <p>작업 중이거나 기록해 둘 개인 프로젝트를 모아둡니다.</p>
+  </section>
+
+  <section class="section project-grid">
+    {projects.map((project) => <ProjectCard {...project} />)}
+  </section>
+</Layout>

@@ -1,0 +1,127 @@
+---
+import { getPostPath, getPublishedPosts } from "@lib/posts";
+
+const navItems = [
+  { href: "/posts", label: "Posts" },
+  { href: "/projects", label: "Projects" },
+  { href: "/about", label: "About" }
+];
+
+const currentPath = Astro.url.pathname.replace(/\/$/, "") || "/";
+const searchPosts = (await getPublishedPosts()).slice(0, 3);
+
+function isActive(href: string) {
+  return currentPath === href || currentPath.startsWith(`${href}/`);
+}
+---
+
+<header class="site-header">
+  <a class="brand" href="/">
+    <span class="brand-mark" aria-hidden="true">S</span>
+    <span>san2blog</span>
+  </a>
+
+  <div class="header-actions">
+    <nav class="desktop-nav" aria-label="주요 내비게이션">
+      {navItems.map((item) => (
+        <a href={item.href} aria-current={isActive(item.href) ? "page" : undefined}>
+          {item.label}
+        </a>
+      ))}
+    </nav>
+
+    <button
+      class="icon-button search-toggle"
+      type="button"
+      aria-label="검색 열기"
+      aria-expanded="false"
+      aria-controls="site-search-overlay"
+    >
+      <svg aria-hidden="true" viewBox="0 0 24 24">
+        <path d="m21 21-4.3-4.3" />
+        <circle cx="11" cy="11" r="7" />
+      </svg>
+    </button>
+
+    <details class="mobile-nav">
+      <summary aria-label="메뉴 열기">Menu</summary>
+      <nav aria-label="모바일 내비게이션">
+        {navItems.map((item) => (
+          <a href={item.href} aria-current={isActive(item.href) ? "page" : undefined}>
+            {item.label}
+          </a>
+        ))}
+      </nav>
+    </details>
+  </div>
+</header>
+
+<div id="site-search-overlay" class="search-overlay" hidden>
+  <div class="search-overlay-bar">
+    <a class="search-overlay-brand" href="/">
+      <span class="brand-mark" aria-hidden="true">S</span>
+      <span>san2blog</span>
+    </a>
+    <button class="search-close" type="button" aria-label="검색 닫기">×</button>
+  </div>
+
+  <form class="overlay-search-form" action="/search" method="get" role="search">
+    <label class="sr-only" for="site-search-input">블로그 검색</label>
+    <input
+      id="site-search-input"
+      name="q"
+      type="search"
+      placeholder="제목, 태그 검색"
+      autocomplete="off"
+    />
+  </form>
+
+  <div class="search-suggestions" aria-label="최근 글">
+    {searchPosts.map((post) => (
+      <a class="search-suggestion" href={getPostPath(post)}>
+        <strong>{post.data.title}</strong>
+        <small>{post.data.description}</small>
+      </a>
+    ))}
+  </div>
+</div>
+
+<script>
+  const searchOverlay = document.querySelector("#site-search-overlay");
+  const searchToggle = document.querySelector(".search-toggle");
+  const searchClose = document.querySelector(".search-close");
+  const searchInput = document.querySelector("#site-search-input");
+
+  function openSearchOverlay() {
+    if (!(searchOverlay instanceof HTMLElement)) return;
+    searchOverlay.hidden = false;
+    document.body.classList.add("search-open");
+    searchToggle?.setAttribute("aria-expanded", "true");
+    window.setTimeout(() => {
+      if (searchInput instanceof HTMLInputElement) {
+        searchInput.focus();
+      }
+    }, 30);
+  }
+
+  function closeSearchOverlay() {
+    if (!(searchOverlay instanceof HTMLElement)) return;
+    searchOverlay.hidden = true;
+    document.body.classList.remove("search-open");
+    searchToggle?.setAttribute("aria-expanded", "false");
+  }
+
+  if (searchToggle instanceof HTMLButtonElement) {
+    searchToggle.addEventListener("click", openSearchOverlay);
+  }
+
+  if (searchClose instanceof HTMLButtonElement) {
+    searchClose.addEventListener("click", closeSearchOverlay);
+  }
+
+  document.addEventListener("keydown", (event) => {
+    if (event.key === "Escape") {
+      closeSearchOverlay();
+    }
+  });
+</script>

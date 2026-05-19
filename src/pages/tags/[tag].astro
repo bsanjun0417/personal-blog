@@ -1,0 +1,28 @@
+---
+import Layout from "@layouts/Layout.astro";
+import PostCard from "@components/PostCard.astro";
+import { getAllTags, getPublishedPosts } from "@lib/posts";
+
+export async function getStaticPaths() {
+  const posts = await getPublishedPosts();
+
+  return getAllTags(posts).map((tag) => ({
+    params: { tag }
+  }));
+}
+
+const tag = Astro.params.tag;
+const posts = (await getPublishedPosts()).filter((post) => post.data.tags.includes(tag ?? ""));
+---
+
+<Layout title={`#${tag}`} description={`#${tag} 태그 글 목록`}>
+  <section class="page-hero section">
+    <p class="section-label">Tag</p>
+    <h1>#{tag}</h1>
+    <p>{posts.length}개의 글이 있습니다.</p>
+  </section>
+
+  <section class="section post-list">
+    {posts.map((post) => <PostCard post={post} />)}
+  </section>
+</Layout>

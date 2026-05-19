@@ -1,0 +1,30 @@
+---
+import { categoryLabels, formatDate, getPostPath, type Post } from "@lib/posts";
+
+interface Props {
+  post: Post;
+  compact?: boolean;
+}
+
+const { post, compact = false } = Astro.props;
+// 최근 글 카드에서는 오른쪽 태그 영역이 과하지 않게 3개까지만 보여줍니다.
+const visibleTags = compact ? post.data.tags.slice(0, 3) : post.data.tags;
+---
+
+<article class:list={["post-card", { "post-card-compact": compact }]}>
+  <div class="post-card-main">
+    {!compact && (
+      <div class="post-meta">
+        <a href={`/categories/${post.data.category}`}>{categoryLabels[post.data.category]}</a>
+        <time datetime={post.data.date.toISOString()}>{formatDate(post.data.date)}</time>
+      </div>
+    )}
+    <h2><a href={getPostPath(post)}>{post.data.title}</a></h2>
+    {!compact && <p>{post.data.description}</p>}
+  </div>
+  {visibleTags.length > 0 && (
+    <div class:list={["tag-row", { "compact-tag-row": compact }]} aria-label="태그">
+      {visibleTags.map((tag) => <a href={`/tags/${tag}`}>#{tag}</a>)}
+    </div>
+  )}
+</article>
