@@ -1,13 +1,16 @@
 ---
-import { getPostPath, getPublishedPosts } from "@lib/posts";
+import { getPostPath, getPublishedPosts, withBasePath } from "@lib/posts";
 
 const navItems = [
-  { href: "/posts", label: "Posts" },
-  { href: "/projects", label: "Projects" },
-  { href: "/about", label: "About" }
+  { path: "/posts", label: "Posts" },
+  { path: "/projects", label: "Projects" },
+  { path: "/about", label: "About" }
 ];
 
-const currentPath = Astro.url.pathname.replace(/\/$/, "") || "/";
+const basePath = import.meta.env.BASE_URL.replace(/\/$/, "");
+const currentPath = Astro.url.pathname
+  .replace(new RegExp(`^${basePath}`), "")
+  .replace(/\/$/, "") || "/";
 const searchPosts = (await getPublishedPosts()).slice(0, 3);
 
 function isActive(href: string) {
@@ -16,7 +19,7 @@ function isActive(href: string) {
 ---
 
 <header class="site-header">
-  <a class="brand" href="/">
+  <a class="brand" href={withBasePath("/")}>
     <span class="brand-mark" aria-hidden="true">S</span>
     <span>san2blog</span>
   </a>
@@ -24,7 +27,7 @@ function isActive(href: string) {
   <div class="header-actions">
     <nav class="desktop-nav" aria-label="주요 내비게이션">
       {navItems.map((item) => (
-        <a href={item.href} aria-current={isActive(item.href) ? "page" : undefined}>
+        <a href={withBasePath(item.path)} aria-current={isActive(item.path) ? "page" : undefined}>
           {item.label}
         </a>
       ))}
@@ -47,7 +50,7 @@ function isActive(href: string) {
       <summary aria-label="메뉴 열기">Menu</summary>
       <nav aria-label="모바일 내비게이션">
         {navItems.map((item) => (
-          <a href={item.href} aria-current={isActive(item.href) ? "page" : undefined}>
+          <a href={withBasePath(item.path)} aria-current={isActive(item.path) ? "page" : undefined}>
             {item.label}
           </a>
         ))}
@@ -58,14 +61,14 @@ function isActive(href: string) {
 
 <div id="site-search-overlay" class="search-overlay" hidden>
   <div class="search-overlay-bar">
-    <a class="search-overlay-brand" href="/">
+    <a class="search-overlay-brand" href={withBasePath("/")}>
       <span class="brand-mark" aria-hidden="true">S</span>
       <span>san2blog</span>
     </a>
     <button class="search-close" type="button" aria-label="검색 닫기">×</button>
   </div>
 
-  <form class="overlay-search-form" action="/search" method="get" role="search">
+  <form class="overlay-search-form" action={withBasePath("/search")} method="get" role="search">
     <label class="sr-only" for="site-search-input">블로그 검색</label>
     <input
       id="site-search-input"

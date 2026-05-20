@@ -1,9 +1,9 @@
 ---
 import Layout from "@layouts/Layout.astro";
+import { withBasePath } from "@lib/posts";
 
-const baseUrl = import.meta.env.BASE_URL;
-const pagefindCss = `${baseUrl}pagefind/pagefind-ui.css`;
-const pagefindJs = `${baseUrl}pagefind/pagefind-ui.js`;
+const pagefindCss = withBasePath("pagefind/pagefind-ui.css");
+const pagefindJs = withBasePath("pagefind/pagefind-ui.js");
 ---
 
 <Layout title="Search" description="블로그 검색">

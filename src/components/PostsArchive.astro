@@ -1,5 +1,6 @@
 ---
 import PostCard from "@components/PostCard.astro";
+import { withBasePath } from "@lib/posts";
 import type { Post } from "@lib/posts";
 
 interface CategoryNode {
@@ -23,7 +24,7 @@ interface Props {
 
 const { posts, categories, recentTags, currentPage, pageCount } = Astro.props;
 const pages = Array.from({ length: pageCount }, (_, index) => index + 1);
-const getPageHref = (page: number) => page === 1 ? "/posts" : `/posts/page/${page}`;
+const getPageHref = (page: number) => withBasePath(page === 1 ? "/posts" : `/posts/page/${page}`);
 const firstActiveCategoryIndex = categories.findIndex((category) => category.count > 0);
 const openCategoryIndex = firstActiveCategoryIndex === -1 ? 0 : firstActiveCategoryIndex;
 ---
@@ -44,13 +45,13 @@ const openCategoryIndex = firstActiveCategoryIndex === -1 ? 0 : firstActiveCateg
             </summary>
             <div class="subcategory-list">
               <div>
-                <a class="subcategory-all" href={`/categories/${category.key}`}>
+                <a class="subcategory-all" href={withBasePath(`/categories/${category.key}`)}>
                   <span>전체 보기</span>
                   <small>{category.count}</small>
                 </a>
                 {category.subcategories.length > 0 ? (
                   category.subcategories.map((subcategory) => (
-                    <a href={`/tags/${subcategory.key}`}>
+                    <a href={withBasePath(`/tags/${subcategory.key}`)}>
                       <span>#{subcategory.label}</span>
                       <small>{subcategory.count}</small>
                     </a>
@@ -98,7 +99,7 @@ const openCategoryIndex = firstActiveCategoryIndex === -1 ? 0 : firstActiveCateg
   <aside class="recent-tags-sidebar" aria-labelledby="recent-tags-heading">
     <h2 id="recent-tags-heading">Recent Tags</h2>
     <div class="recent-tag-cloud">
-      {recentTags.map((tag) => <a href={`/tags/${tag}`}>#{tag}</a>)}
+      {recentTags.map((tag) => <a href={withBasePath(`/tags/${tag}`)}>#{tag}</a>)}
     </div>
   </aside>
 </div>

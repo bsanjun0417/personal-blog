@@ -1,7 +1,7 @@
 ---
 import Layout from "@layouts/Layout.astro";
 import PostCard from "@components/PostCard.astro";
-import { categoryLabels, formatDate, getPostPath, getPublishedPosts } from "@lib/posts";
+import { categoryLabels, formatDate, getPostPath, getPublishedPosts, withBasePath } from "@lib/posts";
 
 const posts = await getPublishedPosts();
 const latestPosts = posts.slice(0, 3);
@@ -14,10 +14,10 @@ const featuredPost = latestPosts[0];
       <p class="section-label">san2blog</p>
       <h1>작게 쓰고, 다시 찾기 쉽게.</h1>
       <p>
-        개발 기록, 영어 메모, 프로젝트 노트를 Markdown으로 정리하는 개인 블로그입니다.
+        개발 기록, 영어 메모, 프로젝트 힌트를 Markdown으로 정리하는 개인 블로그입니다.
       </p>
       <div class="hero-actions">
-        <a class="button primary" href="/posts">글 목록</a>
+        <a class="button primary" href={withBasePath("/posts")}>글 목록</a>
       </div>
     </div>
 
@@ -45,7 +45,7 @@ const featuredPost = latestPosts[0];
         <p class="section-label">Latest</p>
         <h2>최근 글</h2>
       </div>
-      <a class="text-link" href="/posts">전체 보기</a>
+      <a class="text-link" href={withBasePath("/posts")}>전체 보기</a>
     </div>
     <div class="post-grid compact-posts">
       {latestPosts.map((post) => <PostCard post={post} compact />)}

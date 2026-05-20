@@ -11,6 +11,15 @@ export const categoryLabels: Record<Post["data"]["category"], string> = {
 
 export const POSTS_PER_PAGE = 4;
 
+export function withBasePath(path: string) {
+  const baseUrl = import.meta.env.BASE_URL.endsWith("/")
+    ? import.meta.env.BASE_URL
+    : `${import.meta.env.BASE_URL}/`;
+  const cleanPath = path.replace(/^\//, "");
+
+  return `${baseUrl}${cleanPath}`;
+}
+
 export async function getPublishedPosts() {
   const posts = await getCollection("posts", ({ data }) => !data.draft);
 
@@ -20,7 +29,7 @@ export async function getPublishedPosts() {
 }
 
 export function getPostPath(post: Post) {
-  return `/posts/${post.slug}`;
+  return withBasePath(`/posts/${post.slug}`);
 }
 
 export function formatDate(date: Date) {

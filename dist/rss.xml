@@ -3,17 +3,9 @@
   <channel>
     <title>san2blog</title>
     <description>개발 기록, 영어 메모, 프로젝트 노트를 정리하는 개인 블로그입니다.</description>
-    <link>https://blog.san2blog.com/</link>
-    <lastBuildDate>Wed, 20 May 2026 00:00:00 GMT</lastBuildDate>
+    <link>https://bsanjun0417.github.io/personal-blog/</link>
+    <lastBuildDate>Wed, 20 May 2026 06:08:15 GMT</lastBuildDate>
     <language>ko-KR</language>
     
-      <item>
-        <title>파이브가이즈 후기</title>
-        <description>사진과 함께 남기는 간단한 방문 메모입니다.</description>
-        <link>https://blog.san2blog.com/posts/five-guys-note</link>
-        <guid>https://blog.san2blog.com/posts/five-guys-note</guid>
-        <pubDate>Wed, 20 May 2026 00:00:00 GMT</pubDate>
-        <category>memo</category>
-      </item>
   </channel>
 </rss>

@@ -30,6 +30,9 @@ jobs:
         run: npm ci
 
       - name: Build
+        env:
+          SITE: https://bsanjun0417.github.io
+          BASE_PATH: /personal-blog/
         run: npm run build
 
       - name: Upload artifact

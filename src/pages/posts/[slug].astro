@@ -1,6 +1,6 @@
 ---
 import Layout from "@layouts/Layout.astro";
-import { categoryLabels, formatDate, getPostPath, getPublishedPosts } from "@lib/posts";
+import { categoryLabels, formatDate, getPostPath, getPublishedPosts, withBasePath } from "@lib/posts";
 
 export async function getStaticPaths() {
   const posts = await getPublishedPosts();
@@ -24,13 +24,13 @@ const tocHeadings = headings.filter((heading) => heading.depth >= 2 && heading.d
   <article class="post-detail section">
     <header class="post-header">
       <div class="post-meta">
-        <a href={`/categories/${post.data.category}`}>{categoryLabels[post.data.category]}</a>
+        <a href={withBasePath(`/categories/${post.data.category}`)}>{categoryLabels[post.data.category]}</a>
         <time datetime={post.data.date.toISOString()}>{formatDate(post.data.date)}</time>
       </div>
       <h1>{post.data.title}</h1>
       <p>{post.data.description}</p>
       <div class="tag-row">
-        {post.data.tags.map((tag) => <a href={`/tags/${tag}`}>#{tag}</a>)}
+        {post.data.tags.map((tag) => <a href={withBasePath(`/tags/${tag}`)}>#{tag}</a>)}
       </div>
     </header>
 

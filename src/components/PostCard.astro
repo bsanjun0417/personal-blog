@@ -1,5 +1,5 @@
 ---
-import { categoryLabels, formatDate, getPostPath, type Post } from "@lib/posts";
+import { categoryLabels, formatDate, getPostPath, withBasePath, type Post } from "@lib/posts";
 
 interface Props {
   post: Post;
@@ -16,7 +16,7 @@ const visibleTags = compact ? post.data.tags.slice(0, 3) : [];
   <div class="post-card-main">
     {!compact && (
       <div class="post-meta">
-        <a href={`/categories/${post.data.category}`}>{categoryLabels[post.data.category]}</a>
+        <a href={withBasePath(`/categories/${post.data.category}`)}>{categoryLabels[post.data.category]}</a>
         <time datetime={post.data.date.toISOString()}>{formatDate(post.data.date)}</time>
       </div>
     )}
@@ -34,7 +34,7 @@ const visibleTags = compact ? post.data.tags.slice(0, 3) : [];
   )}
   {visibleTags.length > 0 && (
     <div class:list={["tag-row", { "compact-tag-row": compact }]} aria-label="태그">
-      {visibleTags.map((tag) => <a href={`/tags/${tag}`}>#{tag}</a>)}
+      {visibleTags.map((tag) => <a href={withBasePath(`/tags/${tag}`)}>#{tag}</a>)}
     </div>
   )}
 </article>
