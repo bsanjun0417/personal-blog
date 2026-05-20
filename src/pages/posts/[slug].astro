@@ -21,7 +21,7 @@ const tocHeadings = headings.filter((heading) => heading.depth >= 2 && heading.d
 ---
 
 <Layout title={post.data.title} description={post.data.description}>
-  <article class="post-detail section">
+  <article class="post-detail section" data-pagefind-body>
     <header class="post-header">
       <div class="post-meta">
         <a href={withBasePath(`/categories/${post.data.category}`)}>{categoryLabels[post.data.category]}</a>
@@ -35,11 +35,11 @@ const tocHeadings = headings.filter((heading) => heading.depth >= 2 && heading.d
     </header>
 
     <div class="post-shell">
-      <div class="prose" data-pagefind-body>
+      <div class="prose">
         <Content />
       </div>
       {tocHeadings.length > 0 && (
-        <aside class="toc" aria-label="글 목차">
+        <aside class="toc" aria-label="글 목차" data-pagefind-ignore>
           <strong>목차</strong>
           <nav>
             {tocHeadings.map((heading) => (
@@ -52,7 +52,7 @@ const tocHeadings = headings.filter((heading) => heading.depth >= 2 && heading.d
       )}
     </div>
 
-    <nav class="post-nav" aria-label="이전 글과 다음 글">
+    <nav class="post-nav" aria-label="이전 글과 다음 글" data-pagefind-ignore>
       {olderPost ? (
         <a href={getPostPath(olderPost)}>
           <span>이전 글</span>

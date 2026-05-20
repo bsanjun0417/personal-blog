@@ -1,13 +1,11 @@
 import { getCollection, type CollectionEntry } from "astro:content";
+import categories from "../data/categories.json";
 
 export type Post = CollectionEntry<"posts">;
 
-export const categoryLabels: Record<Post["data"]["category"], string> = {
-  dev: "개발",
-  english: "영어",
-  memo: "메모",
-  project: "프로젝트"
-};
+export const categoryLabels = Object.fromEntries(
+  categories.map((category) => [category.key, category.label])
+) as Record<string, string>;
 
 export const POSTS_PER_PAGE = 4;
 
@@ -49,7 +47,7 @@ export function getAllTags(posts: Post[]) {
 export function getRecentTags(posts: Post[]) {
   const tags = new Set<string>();
 
-  // 최신 글 순서를 유지해 사이드바 태그가 최근 사용 흐름을 먼저 보여주게 한다.
+  // 최신 글 순서를 유지해서 사이드바 태그가 최근 사용 흐름을 먼저 보여주게 한다.
   posts.forEach((post) => {
     post.data.tags.forEach((tag) => tags.add(tag));
   });
@@ -59,7 +57,7 @@ export function getRecentTags(posts: Post[]) {
 
 export function getCategoryCounts(posts: Post[]) {
   return Object.entries(categoryLabels).map(([key, label]) => ({
-    key: key as Post["data"]["category"],
+    key,
     label,
     count: posts.filter((post) => post.data.category === key).length
   }));

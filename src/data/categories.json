@@ -1,0 +1,18 @@
+[
+  {
+    "key": "dev",
+    "label": "개발"
+  },
+  {
+    "key": "english",
+    "label": "영어"
+  },
+  {
+    "key": "memo",
+    "label": "메모"
+  },
+  {
+    "key": "project",
+    "label": "프로젝트"
+  }
+]

@@ -1,4 +1,7 @@
 import { defineCollection, z } from "astro:content";
+import categories from "../data/categories.json";
+
+const categoryKeys = categories.map((category) => category.key) as [string, ...string[]];
 
 const posts = defineCollection({
   type: "content",
@@ -6,7 +9,7 @@ const posts = defineCollection({
     title: z.string(),
     description: z.string(),
     date: z.coerce.date(),
-    category: z.enum(["dev", "english", "memo", "project"]),
+    category: z.enum(categoryKeys),
     cover: image().optional(),
     tags: z.array(z.string()).default([]),
     draft: z.boolean().default(false)

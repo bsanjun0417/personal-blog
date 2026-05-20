@@ -4,6 +4,7 @@ import { withBasePath } from "@lib/posts";
 
 const pagefindCss = withBasePath("pagefind/pagefind-ui.css");
 const pagefindJs = withBasePath("pagefind/pagefind-ui.js");
+const pagefindBundlePath = withBasePath("pagefind/");
 ---
 
 <Layout title="Search" description="블로그 검색">
@@ -17,28 +18,23 @@ const pagefindJs = withBasePath("pagefind/pagefind-ui.js");
     <link href={pagefindCss} rel="stylesheet" />
     <div id="search"></div>
     <noscript>검색 기능을 사용하려면 JavaScript가 필요합니다.</noscript>
-    <script define:vars={{ pagefindJs }}>
+    <script define:vars={{ pagefindJs, pagefindBundlePath }}>
       const target = document.querySelector("#search");
       const params = new URLSearchParams(window.location.search);
       const initialQuery = params.get("q")?.trim() ?? "";
 
       import(pagefindJs)
         .then(({ PagefindUI }) => {
-          new PagefindUI({
+          const search = new PagefindUI({
             element: "#search",
+            bundlePath: pagefindBundlePath,
             showImages: false,
             showSubResults: true
           });
 
-          // 헤더 검색으로 전달된 q 값을 Pagefind 입력창에 반영합니다.
+          // 헤더 검색으로 전달된 q 값을 Pagefind에 직접 전달합니다.
           if (initialQuery) {
-            window.setTimeout(() => {
-              const input = target?.querySelector("input");
-              if (input instanceof HTMLInputElement) {
-                input.value = initialQuery;
-                input.dispatchEvent(new Event("input", { bubbles: true }));
-              }
-            }, 60);
+            search.triggerSearch(initialQuery);
           }
         })
         .catch(() => {
