@@ -1,0 +1,65 @@
+<!DOCTYPE html><html lang="ko"> <head><meta charset="UTF-8"><meta name="description" content="사진과 함께 남기는 간단한 방문 메모입니다."><meta name="viewport" content="width=device-width"><meta name="generator" content="Astro v5.18.1"><link rel="icon" type="image/svg+xml" href="/personal-blog/favicon.svg"><link rel="alternate" type="application/rss+xml" title="san2blog RSS" href="https://bsanjun0417.github.io/personal-blog/rss.xml"><title>파이썬이란? | san2blog</title><link rel="stylesheet" href="/personal-blog/_astro/about.CXhn9Jl6.css"></head> <body> <header class="site-header"> <a class="brand" href="/personal-blog/"> <span class="brand-mark" aria-hidden="true">S</span> <span>san2blog</span> </a> <div class="header-actions"> <nav class="desktop-nav" aria-label="주요 내비게이션"> <a href="/personal-blog/posts" aria-current="page"> Posts </a><a href="/personal-blog/projects"> Projects </a><a href="/personal-blog/about"> About </a> </nav> <button class="icon-button search-toggle" type="button" aria-label="검색 열기" aria-expanded="false" aria-controls="site-search-overlay"> <svg aria-hidden="true" viewBox="0 0 24 24"> <path d="m21 21-4.3-4.3"></path> <circle cx="11" cy="11" r="7"></circle> </svg> </button> <details class="mobile-nav"> <summary aria-label="메뉴 열기">Menu</summary> <nav aria-label="모바일 내비게이션"> <a href="/personal-blog/posts" aria-current="page"> Posts </a><a href="/personal-blog/projects"> Projects </a><a href="/personal-blog/about"> About </a> </nav> </details> </div> </header> <div id="site-search-overlay" class="search-overlay" hidden> <div class="search-overlay-bar"> <a class="search-overlay-brand" href="/personal-blog/"> <span class="brand-mark" aria-hidden="true">S</span> <span>san2blog</span> </a> <button class="search-close" type="button" aria-label="검색 닫기">×</button> </div> <form class="overlay-search-form" action="/personal-blog/search" method="get" role="search"> <label class="sr-only" for="site-search-input">블로그 검색</label> <input id="site-search-input" name="q" type="search" placeholder="제목, 태그 검색" autocomplete="off"> </form> <div class="search-suggestions" aria-label="최근 글"> <a class="search-suggestion" href="/personal-blog/posts/prd"> <strong>파이썬이란?</strong> <small>사진과 함께 남기는 간단한 방문 메모입니다.</small> </a> </div> </div> <script type="module">const e=document.querySelector("#site-search-overlay"),t=document.querySelector(".search-toggle"),n=document.querySelector(".search-close"),c=document.querySelector("#site-search-input");function r(){e instanceof HTMLElement&&(e.hidden=!1,document.body.classList.add("search-open"),t?.setAttribute("aria-expanded","true"),window.setTimeout(()=>{c instanceof HTMLInputElement&&c.focus()},30))}function o(){e instanceof HTMLElement&&(e.hidden=!0,document.body.classList.remove("search-open"),t?.setAttribute("aria-expanded","false"))}t instanceof HTMLButtonElement&&t.addEventListener("click",r);n instanceof HTMLButtonElement&&n.addEventListener("click",o);document.addEventListener("keydown",s=>{s.key==="Escape"&&o()});</script> <main>  <article class="post-detail section"> <header class="post-header"> <div class="post-meta"> <a href="/personal-blog/categories/memo">메모</a> <time datetime="2026-05-20T00:00:00.000Z">2026년 5월 20일</time> </div> <h1>파이썬이란?</h1> <p>사진과 함께 남기는 간단한 방문 메모입니다.</p> <div class="tag-row"> <a href="/personal-blog/tags/memo">#memo</a><a href="/personal-blog/tags/photo">#photo</a><a href="/personal-blog/tags/daily">#daily</a> </div> </header> <div class="post-shell"> <div class="prose" data-pagefind-body> <h1 id="prd-나나스빵집-단일-홈-웹사이트">PRD: 나나스빵집 단일 홈 웹사이트</h1>
+<h2 id="목표">목표</h2>
+<p>취미로 빵을 굽고 지인/모임에 나누는 “나나스빵집” 소개용 정적 웹사이트 제작.
+<img src="/uploads/prd/nanas-bread-04.png" alt="블로그 썸네일"></p>
+<h2 id="기술">기술</h2>
+<ul>
+<li>HTML</li>
+<li>CSS</li>
+<li>JavaScript 약간</li>
+<li>React/Vue 사용하지 않음</li>
+<li>GitHub Pages 배포 가능 구조</li>
+</ul>
+<h2 id="파일-구조">파일 구조</h2>
+<p>/index.html
+/style.css
+/script.js
+/assets/hero-bread.png</p>
+<h2 id="디자인">디자인</h2>
+<ul>
+<li>크림색 배경</li>
+<li>딸기우유 핑크 포인트</li>
+<li>브라운 텍스트</li>
+<li>둥근 카드, 손그림 스티커 감성</li>
+<li>모바일 우선 반응형</li>
+</ul>
+<h2 id="섹션">섹션</h2>
+<ol>
+<li>Header</li>
+</ol>
+<ul>
+<li>로고: 나나스빵집</li>
+<li>메뉴: 오늘의 빵 / 기록 / 문의</li>
+</ul>
+<ol start="2">
+<li>Hero</li>
+</ol>
+<ul>
+<li>문구: 오늘도 나나가 구웠어요</li>
+<li>설명: 취미로 굽고, 가끔 나누는 작은 홈베이커리</li>
+<li>버튼: 오늘의 빵 보기</li>
+</ul>
+<ol start="3">
+<li>오늘의 빵</li>
+</ol>
+<ul>
+<li>소금빵, 휘낭시에, 식빵 카드</li>
+</ul>
+<ol start="4">
+<li>빵 기록</li>
+</ol>
+<ul>
+<li>사진 카드 느낌으로 최근 베이킹 기록 표시</li>
+</ul>
+<ol start="5">
+<li>문의</li>
+</ol>
+<ul>
+<li>인스타/카카오 문의 버튼</li>
+<li>링크는 임시로 #</li>
+</ul>
+<h2 id="js-기능">JS 기능</h2>
+<ul>
+<li>“오늘의 빵 랜덤 추천” 버튼</li>
+<li>클릭 시 빵 이름과 짧은 문구 변경</li>
+</ul> </div> <aside class="toc" aria-label="글 목차"> <strong>목차</strong> <nav> <a class="depth-2" href="#목표"> 목표 </a><a class="depth-2" href="#기술"> 기술 </a><a class="depth-2" href="#파일-구조"> 파일 구조 </a><a class="depth-2" href="#디자인"> 디자인 </a><a class="depth-2" href="#섹션"> 섹션 </a><a class="depth-2" href="#js-기능"> JS 기능 </a> </nav> </aside> </div> <nav class="post-nav" aria-label="이전 글과 다음 글"> <span></span> <span></span> </nav> </article>  </main> <footer class="site-footer"> <p>개발 기록과 개인 메모를 조용히 쌓아두는 공간입니다.</p> <nav aria-label="푸터 링크"> <a href="/personal-blog/rss.xml">RSS</a> <a href="https://github.com/san2blog" rel="noreferrer">GitHub</a> </nav> </footer> </body></html>
