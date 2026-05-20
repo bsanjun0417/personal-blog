@@ -9,15 +9,24 @@ import {
   getRecentTags
 } from "@lib/posts";
 
+export async function getStaticPaths() {
+  const posts = await getPublishedPosts();
+  const pageCount = getPageCount(posts);
+
+  return Array.from({ length: Math.max(0, pageCount - 1) }, (_, index) => ({
+    params: { page: String(index + 2) }
+  }));
+}
+
 const allPosts = await getPublishedPosts();
-const currentPage = 1;
+const currentPage = Number(Astro.params.page ?? "1");
 const pageCount = getPageCount(allPosts);
 const posts = getPaginatedPosts(allPosts, currentPage);
 const categories = getCategoryTree(allPosts);
 const recentTags = getRecentTags(allPosts);
 ---
 
-<Layout title="Posts" description="전체 글 목록">
+<Layout title={`Posts ${currentPage}`} description="전체 글 목록">
   <section class="page-hero section">
     <p class="section-label">Posts</p>
     <h1>전체 글</h1>

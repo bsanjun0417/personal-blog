@@ -15,29 +15,5 @@
         <pubDate>Wed, 20 May 2026 00:00:00 GMT</pubDate>
         <category>memo</category>
       </item>
-      <item>
-        <title>Astro 블로그 시작하기</title>
-        <description>Astro로 Markdown 기반 개인 블로그를 만드는 첫 기록입니다.</description>
-        <link>https://blog.san2blog.com/posts/astro-start</link>
-        <guid>https://blog.san2blog.com/posts/astro-start</guid>
-        <pubDate>Sun, 17 May 2026 00:00:00 GMT</pubDate>
-        <category>dev</category>
-      </item>
-      <item>
-        <title>GitHub Pages 배포 준비</title>
-        <description>GitHub Actions로 Astro 블로그를 자동 배포하는 흐름을 정리합니다.</description>
-        <link>https://blog.san2blog.com/posts/github-pages-deploy</link>
-        <guid>https://blog.san2blog.com/posts/github-pages-deploy</guid>
-        <pubDate>Sat, 16 May 2026 00:00:00 GMT</pubDate>
-        <category>dev</category>
-      </item>
-      <item>
-        <title>영어 학습 루틴 메모</title>
-        <description>개발 문서를 읽기 위한 짧은 영어 학습 루틴입니다.</description>
-        <link>https://blog.san2blog.com/posts/english-note-routine</link>
-        <guid>https://blog.san2blog.com/posts/english-note-routine</guid>
-        <pubDate>Fri, 15 May 2026 00:00:00 GMT</pubDate>
-        <category>english</category>
-      </item>
   </channel>
 </rss>

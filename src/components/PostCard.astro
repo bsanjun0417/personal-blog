@@ -7,8 +7,9 @@ interface Props {
 }
 
 const { post, compact = false } = Astro.props;
-// 최근 글 카드에서는 오른쪽 태그 영역이 과하지 않게 3개까지만 보여줍니다.
-const visibleTags = compact ? post.data.tags.slice(0, 3) : post.data.tags;
+const postPath = getPostPath(post);
+// 목록 카드는 태그 대신 썸네일을 보여주고, 홈의 compact 카드는 기존처럼 가볍게 유지한다.
+const visibleTags = compact ? post.data.tags.slice(0, 3) : [];
 ---
 
 <article class:list={["post-card", { "post-card-compact": compact }]}>
@@ -19,9 +20,18 @@ const visibleTags = compact ? post.data.tags.slice(0, 3) : post.data.tags;
         <time datetime={post.data.date.toISOString()}>{formatDate(post.data.date)}</time>
       </div>
     )}
-    <h2><a href={getPostPath(post)}>{post.data.title}</a></h2>
+    <h2><a href={postPath}>{post.data.title}</a></h2>
     {!compact && <p>{post.data.description}</p>}
   </div>
+  {!compact && (
+    <a class="post-thumbnail" href={postPath} aria-label={post.data.title}>
+      {post.data.cover ? (
+        <img src={post.data.cover.src} alt="" loading="lazy" />
+      ) : (
+        <span>{categoryLabels[post.data.category]}</span>
+      )}
+    </a>
+  )}
   {visibleTags.length > 0 && (
     <div class:list={["tag-row", { "compact-tag-row": compact }]} aria-label="태그">
       {visibleTags.map((tag) => <a href={`/tags/${tag}`}>#{tag}</a>)}
